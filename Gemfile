@@ -43,7 +43,7 @@ gem "thruster", require: false
 
 gem "dotenv-rails"
 gem "pagy"
-gem 'tailwindcss-rails'
+gem "tailwindcss-rails"
 
 
 group :development, :test do
