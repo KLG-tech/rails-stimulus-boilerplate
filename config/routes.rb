@@ -24,4 +24,6 @@ Rails.application.routes.draw do
     devise_for :users
   end
   resource :sessions, only: [ :destroy ]
+
+  mount MissionControl::Jobs::Engine, at: "/jobs"
 end
