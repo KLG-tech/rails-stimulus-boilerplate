@@ -18,8 +18,8 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("DB_USERNAME", "your_postgres_username") %>
-  password: <%= ENV.fetch("DB_PASSWORD", "your_postgres_password") %>
+  username: <%= ENV.fetch("DB_USERNAME") %>
+  password: <%= ENV.fetch("DB_PASSWORD") %>
 
 
 development:
@@ -84,8 +84,6 @@ production:
   primary: &primary_production
     <<: *default
     database: rails_stimulus_boilerplate_production
-    username: <%= ENV.fetch("DB_USERNAME") %>
-    password: <%= ENV.fetch("DB_PASSWORD") %>
   cache:
     <<: *primary_production
     database: rails_stimulus_boilerplate_production_cache
