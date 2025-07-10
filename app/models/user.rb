@@ -13,6 +13,8 @@ class User < ApplicationRecord
 
   # Associations
   has_many :user_providers, dependent: :destroy
+  has_one_attached :avatar
+
 
 
   def self.from_omniauth(auth)

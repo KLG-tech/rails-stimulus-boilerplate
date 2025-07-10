@@ -55,6 +55,7 @@ gem 'omniauth-rails_csrf_protection'
 
 # For Keycloak integration
 gem 'omniauth-keycloak'
+gem 'aws-sdk-s3', require: false
 
 
 group :development, :test do
