@@ -15,4 +15,13 @@ Rails.application.routes.draw do
   get "home" => "home#index", as: :home
 
   root "home#index"
+
+  if Rails.application.config.x.keycloak.enabled
+    devise_for :users, controllers: {
+      omniauth_callbacks: 'users/omniauth_callbacks'
+    }
+  else
+    devise_for :users
+  end
+  resource :sessions, only: [ :destroy ]
 end
