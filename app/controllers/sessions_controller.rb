@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
 
   def destroy
     sign_out(current_user)
-    Rails.logger.info "testsignout"
     if Rails.application.config.x.keycloak.enabled
       query_params = {
         client_id: ENV["KEYCLOAK_CLIENT_ID"],
