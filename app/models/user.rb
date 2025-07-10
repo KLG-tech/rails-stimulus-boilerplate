@@ -11,29 +11,50 @@ class User < ApplicationRecord
     devise :omniauthable, omniauth_providers: [:keycloak_openid]
   end
 
+  # Associations
+  has_many :user_providers, dependent: :destroy
+
+
   def self.from_omniauth(auth)
-    user_basic_info = auth.dig(:extra, :raw_info, :custom_attributes, :roleapp_access, :user_basic_info)
+    provider = auth[:provider]
 
-    if user_basic_info.blank?
-      Rails.logger.error("User basic info is empty")
-      Rails.logger.debug(auth.inspect)
-
-      raise "User basic info not found, please contact Ceberus support"
-    end
-
-    employee_id = user_basic_info[:nip]
-    name = user_basic_info[:name]
-    email = user_basic_info[:email]
-
-    where(provider: auth[:provider], uid: employee_id).first_or_create do |user|
-      user.name = name
-      user.email = email
-      user.password = Devise.friendly_token[0, 20]
+    if respond_to?("from_#{provider}")
+      send("from_#{provider}", auth)
     end
   rescue StandardError => e
-    Rails.logger.error("Error creating user: #{e.message}")
-    Rails.logger.info("Auth: #{auth.inspect}")
-
+    Rails.logger.error("Error in from_omniauth: #{e.message}")
+    Rails.logger.info("Auth data: #{auth.inspect}")
     raise e
   end
+
+  def self.from_keycloak_openid(auth)
+    user_basic_info = auth.dig(:extra, :raw_info, :custom_attributes, :roleapp_access, :user_basic_info)
+
+    raise "User basic info not found in Keycloak response" if user_basic_info.blank?
+
+    email = user_basic_info[:email]
+    name = user_basic_info[:name]
+    uid  = user_basic_info[:nip]
+    provider = auth[:provider]
+
+    raise "Email is required from provider" if email.blank?
+
+    user = find_or_initialize_by(email: email)
+
+    if user.new_record?
+      user.name = name.presence || "Unknown"
+      user.password = Devise.friendly_token[0, 20]
+      user.save!
+    end
+
+    user.user_providers.find_or_create_by!(
+      provider: provider,
+      uid: uid
+    )
+
+    user
+  end
+
+  # You need to define your function to handle from other provider
+  # For ex: def self.from_github(auth)
 end
