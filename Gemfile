@@ -77,7 +77,6 @@ group :development, :test do
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
-  gem "debug", platforms: %i[mri mingw x64_mingw]
   gem "pry-byebug"
 end
 
