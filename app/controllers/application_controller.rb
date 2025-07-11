@@ -30,4 +30,10 @@ class ApplicationController < ActionController::Base
         "application"
       end
     end
+
+    def append_info_to_payload(payload)
+      super
+
+      payload[:user_id] = current_user.try(:id)
+    end
 end

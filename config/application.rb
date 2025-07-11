@@ -41,5 +41,8 @@ module RailsStimulusBoilerplate
     config.x.keycloak.enabled = true
     config.mission_control.jobs.base_controller_class = "MissionControlJobsController"
     config.mission_control.jobs.http_basic_auth_enabled = false
+
+    config.lograge.enabled = true
+    config.lograge.formatter = Lograge::Formatters::Json.new
   end
 end
