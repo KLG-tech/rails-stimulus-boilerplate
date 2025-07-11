@@ -38,5 +38,9 @@ module RailsStimulusBoilerplate
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.x.keycloak.enabled = true
+
+    config.lograge.enabled = true
+    config.lograge.formatter = Lograge::Formatters::Json.new
   end
 end

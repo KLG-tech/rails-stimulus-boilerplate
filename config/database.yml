@@ -23,8 +23,11 @@ default: &default
 
 
 development:
-  <<: *default
-  database: rails_stimulus_boilerplate_development
+  primary: &primary_development
+    <<: *default
+    database: rails_stimulus_boilerplate_development
+  queue:
+    <<: *primary_development
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -57,8 +60,11 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *default
-  database: rails_stimulus_boilerplate_test
+  primary: &primary_test
+    <<: *default
+    database: rails_stimulus_boilerplate_test
+  queue:
+    <<: *primary_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
