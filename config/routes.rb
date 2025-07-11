@@ -1,3 +1,5 @@
+require 'karafka/web'
+
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -15,4 +17,16 @@ Rails.application.routes.draw do
   get "home" => "home#index", as: :home
 
   root "home#index"
+
+  if Rails.application.config.x.keycloak.enabled
+    devise_for :users, controllers: {
+      omniauth_callbacks: 'users/omniauth_callbacks'
+    }
+  else
+    devise_for :users
+  end
+  resource :sessions, only: [ :destroy ]
+
+  mount MissionControl::Jobs::Engine, at: "/jobs"
+  mount Karafka::Web::App, at: '/karafka'
 end
