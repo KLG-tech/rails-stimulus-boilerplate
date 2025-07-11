@@ -47,6 +47,22 @@ gem "dotenv-rails"
 gem "pagy"
 gem "tailwindcss-rails"
 
+gem "devise"
+
+# Oauth
+gem "omniauth"
+gem "omniauth-rails_csrf_protection"
+
+# For Keycloak integration
+gem "omniauth-keycloak"
+gem "aws-sdk-s3", require: false
+
+gem "mission_control-jobs"
+
+gem "karafka"
+gem "karafka-web" # For the web UI
+
+gem "lograge"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
