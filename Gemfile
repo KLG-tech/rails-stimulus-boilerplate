@@ -75,6 +75,9 @@ group :development, :test do
   gem "rubocop", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
+
+  gem "rspec-rails"
+  gem "factory_bot_rails"
 end
 
 group :development do
@@ -82,4 +85,12 @@ group :development do
   gem "web-console"
   gem "lefthook", require: false
   gem "annotaterb"
+end
+
+group :test do
+  gem "simplecov", require: false
+  gem "simplecov-lcov", require: false
+  gem "faker"
+  gem "shoulda-matchers"
+  gem 'simplecov_lcov_formatter', require: false
 end
