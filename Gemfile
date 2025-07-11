@@ -59,6 +59,9 @@ gem 'aws-sdk-s3', require: false
 
 gem 'mission_control-jobs'
 
+gem 'karafka'
+gem 'karafka-web' # For the web UI
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
