@@ -17,7 +17,6 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
 
-
   # Callbacks
   after_create :assign_default_role
 
