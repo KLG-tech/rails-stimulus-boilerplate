@@ -11,4 +11,11 @@ class ApplicationController < ActionController::Base
       # For sign up
       devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     end
+
+  private
+    def append_info_to_payload(payload)
+      super
+
+      payload[:user_id] = current_user.try(:id)
+    end
 end

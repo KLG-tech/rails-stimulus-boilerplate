@@ -15,11 +15,4 @@ class SessionsController < ApplicationController
       redirect_to "#{ENV["KEYCLOAK_URL"]}/realms/#{ENV["KEYCLOAK_REALM"]}/protocol/openid-connect/logout?#{query_params.to_query}", allow_other_host: true
     end
   end
-
-  def login_as
-    user = User.find(params[:user_id])
-    sign_in(user)
-
-    redirect_to root_path, notice: "Logged in as #{user.name}"
-  end
 end
