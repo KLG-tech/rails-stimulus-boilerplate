@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
+  rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -16,6 +17,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
 
+  # Callbacks
+  after_create :assign_default_role
 
   def self.from_omniauth(auth)
     provider = auth[:provider]
@@ -59,4 +62,8 @@ class User < ApplicationRecord
 
   # You need to define your function to handle from other provider
   # For ex: def self.from_github(auth)
+
+  def assign_default_role
+    self.add_role(:user) if self.roles.blank?
+  end
 end

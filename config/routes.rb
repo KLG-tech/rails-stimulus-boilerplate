@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   get "home" => "home#index", as: :home
+  get 'calendar' => 'calendar#index', as: :calendar
+
 
   root "home#index"
 
