@@ -57,6 +57,8 @@ gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-keycloak'
 gem 'aws-sdk-s3', require: false
 
+gem 'mission_control-jobs'
+
 gem 'rolify'
 gem 'pundit'
 

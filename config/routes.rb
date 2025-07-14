@@ -16,8 +16,6 @@ Rails.application.routes.draw do
   get 'calendar' => 'calendar#index', as: :calendar
 
 
-  root "home#index"
-
   if Rails.application.config.x.keycloak.enabled
     devise_for :users, controllers: {
       omniauth_callbacks: 'users/omniauth_callbacks'
@@ -26,4 +24,10 @@ Rails.application.routes.draw do
     devise_for :users
   end
   resource :sessions, only: [ :destroy ]
+
+  mount MissionControl::Jobs::Engine, at: "/jobs"
+
+  root to: "home#index"
+
+  resources :dashboard, only: [:index]
 end
