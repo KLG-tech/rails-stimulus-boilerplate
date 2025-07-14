@@ -35,7 +35,8 @@
       </div>
     <% end %>
 
-    <%= render 'layouts/sidebar' %>
+    <%= render 'layouts/sidebar' if current_user.present? %>
+
 
     <%= yield %>
   </body>
