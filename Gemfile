@@ -84,4 +84,5 @@ group :development do
   gem "web-console"
   gem "lefthook", require: false
   gem "annotaterb"
+  gem "rename"
 end
