@@ -59,6 +59,7 @@ gem "aws-sdk-s3", require: false
 
 gem "mission_control-jobs"
 
+gem "ruby-lsp-rails"
 gem 'rolify'
 gem 'pundit'
 gem "lograge"
@@ -78,6 +79,7 @@ group :development, :test do
 
   gem "rspec-rails"
   gem "factory_bot_rails"
+  gem "pry-byebug"
 end
 
 group :development do
