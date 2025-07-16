@@ -1,24 +1,46 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a boilerplate project for a Rails application in Kawanlama Group. It is a simple project that uses Stimulus for frontend and Rails for backend.
 
-Things you may want to cover:
+Features:
+- Stimulus for frontend
+- Postgres for database
+- Solid Trifecta:
+  - Solid Queue
+  - Solid Cache
+  - Solid Cable (Optional)
+- RSpec for testing
+- Auth using Devise
 
-* Ruby version
+## Quick Start
 
-* System dependencies
+### Clone this repository
 
-* Configuration
+```bash
+git clone git@github.com:KLG-tech/rails-stimulus-boilerplate.git
+cd rails-stimulus-boilerplate
+```
 
-* Database creation
+### Create a `.env` file
 
-* Database initialization
+```bash
+cp .env.example .env
+```
 
-* How to run the test suite
+Adjust the `.env` file with your own credentials.
 
-* Services (job queues, cache servers, search engines, etc.)
+### Install dependencies
 
-* Deployment instructions
+### Run `bin/setup --skip-server` to install dependencies and prepare the database
 
-* ...
+The setup script will:
+- Install dependencies
+- Rename the project
+- Set up git hooks
+- Prepare the database  
+
+### Run development server
+
+```bash
+bin/dev
+```

@@ -12,8 +12,40 @@ FileUtils.chdir APP_ROOT do
   # This script is idempotent, so that you can run it at any time and get an expectable outcome.
   # Add necessary setup steps to this file.
 
+  # check prerequisites
+  system!("which bundle")
+  
+  if !File.exist?(".env")
+    puts "== Please create a .env file =="
+    exit 1
+  end
+
   puts "== Installing dependencies =="
   system("bundle check") || system!("bundle install")
+
+  # check if postgres and lefthook are installed
+  system!("which postgres")
+  system!("which lefthook")
+
+  if !File.exist?(".rename")
+    puts "== Rename project =="
+    project_name = begin
+      print "Enter your project name: "
+      STDOUT.flush
+      gets&.strip
+    end
+
+    if project_name.nil? || project_name.empty?
+      puts "Project name is required. Exiting setup."
+      exit 1
+    end
+
+    system!("bundle exec rails g rename:into #{project_name}")
+  end
+
+  # Install git hooks with lefthook
+  puts "\n== Installing git hooks =="
+  system! "bundle exec lefthook install"
 
   # puts "\n== Copying sample files =="
   # unless File.exist?("config/database.yml")
