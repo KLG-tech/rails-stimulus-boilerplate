@@ -1,0 +1,12 @@
+<% flash.each do |key, message| %>
+    <div 
+    class="fixed top-4 right-4 z-50 max-w-xs rounded-md px-4 py-3 shadow-lg text-sm font-medium
+            <%= key == "alert" ? "bg-red-100 text-red-800" : "bg-green-100 text-green-800" %>"
+    data-controller="flash"
+    >
+    <div class="flex justify-between items-start gap-4">
+        <div><%= message %></div>
+        <button type="button" class="text-lg leading-none" data-action="click->flash#close">×</button>
+    </div>
+    </div>
+<% end %>

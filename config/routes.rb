@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   get "home" => "home#index", as: :home
-  get 'calendar' => 'calendar#index', as: :calendar
+
+  resources :calendar, only: [:index]
 
 
   if Rails.application.config.x.keycloak.enabled
