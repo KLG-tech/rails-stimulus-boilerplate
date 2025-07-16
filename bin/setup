@@ -30,17 +30,14 @@ FileUtils.chdir APP_ROOT do
   if !File.exist?(".rename")
     puts "== Rename project =="
     project_name = begin
-      print "Enter your project name: "
+      print "Enter your project name (Leave blank to skip): "
       STDOUT.flush
       gets&.strip
     end
 
-    if project_name.nil? || project_name.empty?
-      puts "Project name is required. Exiting setup."
-      exit 1
+    unless project_name.nil? || project_name.empty?
+      system!("bundle exec rails g rename:into #{project_name}")
     end
-
-    system!("bundle exec rails g rename:into #{project_name}")
   end
 
   # Install git hooks with lefthook
